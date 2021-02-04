@@ -25,11 +25,11 @@ def get_password():
 def register():
  user_name = get_username()
  user_password = get_password()
- record = user_name + ", " + user_password + "\n"
+ record = user_name + "," + user_password + ","
  myfile = open("passwords.txt","a")
  myfile.write(record)
  myfile.close()
- print("welcome - successful registration")
+ print("Welcome - successful registration")
  
 #main program
 #register()
@@ -39,15 +39,17 @@ def login():
   """ function: request username & password, check against file records. Return True if found, otherwise false """
   print("Please login with your username and password")
   name = input("Username\n--> ")
-  password = input("Password\n--> ")
+  pword = input("Password\n--> ")
   
   myfile = open("passwords.txt",'r')
   for record in myfile:
-    remove_comma = record.split(", ")
+    remove_comma = record.split(",")
     rec_name = remove_comma[0]
     rec_password = remove_comma[1]
+    #print(remove_comma) #shows that there is a "\n" at the end of every record
     
-    if name == rec_name and password == rec_password:
+    if ((rec_name == name) and (rec_password == pword)) == True:
+    #if rec_password == pword:
       print("Valid username and password entered!")
       myfile.close()
       return True
@@ -65,7 +67,7 @@ def menu():
   
   if option == '1':
     register()
-  else:
+  elif option == '2':
     if login() == True:
       game()
     else:
