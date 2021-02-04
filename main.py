@@ -1,35 +1,35 @@
 def check_digit(password):
- """function: return True if passwords contains a digit otherwise False"""
- digit = False
- for item in password:
-   if item.isdigit():
-     digit = True
- return digit
+  """function: return True if passwords contains a digit otherwise False"""
+  digit = False
+  for item in password:
+    if item.isdigit():
+      digit = True
+  return digit
 #_______________________
 def get_username():
- """ function: get username of 8 characters all lower case"""
- name = input("\nEnter username\n--> ")
- while len(name) != 8 :
-   name = input("must be 8 characters >")
- username = name.lower()
- print(" you username is ",username)
- return username
+  """ function: get username of 8 characters all lower case"""
+  name = input("\nEnter username\n--> ")
+  while len(name) != 8 :
+    name = input("must be 8 characters >")
+  username = name.lower()
+  print(" you username is ",username)
+  return username
 #_______________________
 def get_password():
- """ function: get password 6 characters and at least on digit"""
- password = input("\nEnter password\n--> ")
- while not( (len(password)==6) and (check_digit(password) == True) ) :
-   password = input("must be 6 char and one digit> ")
- return password
+  """ function: get password 6 characters and at least on digit"""
+  password = input("\nEnter password\n--> ")
+  while not( (len(password)==6) and (check_digit(password) == True) ) :
+    password = input("must be 6 char and one digit> ")
+  return password
 #_______________________
 def register():
- user_name = get_username()
- user_password = get_password()
- record = user_name + "," + user_password + ","
- myfile = open("passwords.txt","a")
- myfile.write(record)
- myfile.close()
- print("Success! 😎")
+  user_name = get_username()
+  user_password = get_password()
+  record = user_name + "," + user_password + ","
+  myfile = open("passwords.txt","a")
+  myfile.write(record)
+  myfile.close()
+  print("Success! 😎")
  
 #main program
 #register()
