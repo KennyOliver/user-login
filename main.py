@@ -1,5 +1,5 @@
 def check_digit(password):
- """function returns True if passwords contains a digit otherwise False"""
+ """function: return True if passwords contains a digit otherwise False"""
  digit = False
  for item in password:
    if item.isdigit():
@@ -7,7 +7,7 @@ def check_digit(password):
  return digit
 #_______________________
 def get_username():
- """ function to get username of 8 characters all lower case"""
+ """ function: get username of 8 characters all lower case"""
  name = input("\nEnter username\n--> ")
  while len(name) != 8 :
    name = input("must be 8 characters >")
@@ -16,7 +16,7 @@ def get_username():
  return username
 #_______________________
 def get_password():
- """ function to get password 6 characters and at least on digit"""
+ """ function: get password 6 characters and at least on digit"""
  password = input("\nEnter password\n--> ")
  while not( (len(password)==6) and (check_digit(password) == True) ) :
    password = input("must be 6 char and one digit> ")
@@ -29,7 +29,7 @@ def register():
  myfile = open("passwords.txt","a")
  myfile.write(record)
  myfile.close()
- print("Welcome - successful registration")
+ print("Success! 😎")
  
 #main program
 #register()
@@ -38,8 +38,8 @@ def register():
 def login():
   """ function: request username & password, check against file records. Return True if found, otherwise false """
   print("Please login with your username and password")
-  name = input("Username\n--> ")
-  pword = input("Password\n--> ")
+  name = input("\t👤 Username --> ")
+  pword = input("\t🔒 Password --> ")
   
   myfile = open("passwords.txt",'r')
   for record in myfile:
@@ -50,31 +50,31 @@ def login():
     
     if ((rec_name == name) and (rec_password == pword)) == True:
     #if rec_password == pword:
-      print("Valid username and password entered!")
+      print("Success! 😎")
       myfile.close()
       return True
   myfile.close()
-  print("Invalid username/password!\nNo entry to the game!")
+  print("⚠️ Invalid username/password!\n⚠️ No entry to the game!")
   return False
 #=======================
 def menu():
-  print("Welcome!")
-  print("[1] Register\n[2] Login")
-  option = input("Choose [1] or [2]\n--> ")
+  print("🎮 Welcome! 🎮")
+  print("Choose [1] or [2]\n\t[1] Register 📝\n\t[2] Login 👥 ")
+  option = input("\t--> ")
   
   while not (option.isdigit() and option in ["1","2"]):
     option = input("Choose [1] or [2]\n--> ")
   
   if option == '1':
     register()
-  elif option == '2':
+  else:
     if login() == True:
       game()
     else:
-      print("\nGoodbye!")
+      print("👋 Goodbye! 👋")
 #=======================
 def game():
-  print("THIS IS AN AMAZING GAME!")
+  print("👾 THIS IS AN AMAZING GAME! 👾")
 #=======================
 # main program
 menu()
