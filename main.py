@@ -33,9 +33,14 @@ def register():
   record = user_name + "," + hash_password + ",\n"
   myfile = open("passwords.txt","a")
   myfile.write(record)
-  print(record) #####
   myfile.close()
   print("Success! 😎")
+  
+  now_menu = input("Would you like go to the menu now?\n\t[Y] Yes\n\t[N] No\n--> ").upper()
+  if now_menu == 'Y':
+    menu()
+  else:
+    print("Re-run the program to access menu.")
 #=======================
 def login() -> bool:
   """ function: request username & password, check against file records. Return True if found, otherwise false """
