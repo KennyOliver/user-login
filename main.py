@@ -1,3 +1,5 @@
+import hashlib
+
 def check_digit(password):
   """function: return True if passwords contains a digit otherwise False"""
   digit = False
@@ -25,9 +27,14 @@ def get_password():
 def register():
   user_name = get_username()
   user_password = get_password()
-  record = user_name + "," + user_password + ","
+  #hash_password = hash(user_password())
+  #hash_password = int(hashlib.sha1(encode(user_password)).hexdigest(), 16) % (10 ** 8)
+  hash_password = hashlib.sha256(user_password.encode("utf-8")).hexdigest()
+  
+  record = user_name + "," + hash_password + ","
   myfile = open("passwords.txt","a")
   myfile.write(record)
+  myfile.write("\n") #next line if program re-run
   myfile.close()
   print("Success! 😎")
  
@@ -48,7 +55,10 @@ def login():
     rec_password = remove_comma[1]
     #print(remove_comma) #shows that there is a "\n" at the end of every record
     
-    if ((rec_name == name) and (rec_password == pword)) == True:
+    #hash_rec_password = int(hashlib.sha1(s.encode(rec_password)).hexdigest(), 16) % (10 ** 8)
+    hash_pword = hashlib.sha256(pword.encode("utf-8")).hexdigest()
+    
+    if ((name == rec_name) and (hash_pword == rec_password)) == True:
     #if rec_password == pword:
       print("Success! 😎")
       myfile.close()
