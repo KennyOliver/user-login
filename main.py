@@ -11,30 +11,29 @@ def check_digit(password):
 def get_username():
   """ function: get username of 8 characters all lower case"""
   name = input("\nEnter username\n--> ")
-  while len(name) != 8 :
+  while len(name) < 8 :
     name = input("must be 8 characters >")
-  username = name.lower()
-  print(" you username is ",username)
+  username = name
+  print("Your chosen username is: ",username)
   return username
 #_______________________
 def get_password():
   """ function: get password 6 characters and at least on digit"""
   password = input("\nEnter password\n--> ")
-  while not( (len(password)==6) and (check_digit(password) == True) ) :
-    password = input("must be 6 char and one digit> ")
+  while not( (len(password) >= 8) and (check_digit(password) == True) ) :
+    password = input("Must be 8 char and 1 digit\n--> ")
   return password
 #_______________________
 def register():
   user_name = get_username()
   user_password = get_password()
-  #hash_password = hash(user_password())
-  #hash_password = int(hashlib.sha1(encode(user_password)).hexdigest(), 16) % (10 ** 8)
+  
   hash_password = hashlib.sha256(user_password.encode("utf-8")).hexdigest()
   
-  record = user_name + "," + hash_password + ","
+  record = user_name + "," + hash_password + ",\n"
   myfile = open("passwords.txt","a")
   myfile.write(record)
-  myfile.write("\n") #next line if program re-run
+  print(record) #####
   myfile.close()
   print("Success! 😎")
  
@@ -55,11 +54,9 @@ def login():
     rec_password = remove_comma[1]
     #print(remove_comma) #shows that there is a "\n" at the end of every record
     
-    #hash_rec_password = int(hashlib.sha1(s.encode(rec_password)).hexdigest(), 16) % (10 ** 8)
     hash_pword = hashlib.sha256(pword.encode("utf-8")).hexdigest()
     
     if ((name == rec_name) and (hash_pword == rec_password)) == True:
-    #if rec_password == pword:
       print("Success! 😎")
       myfile.close()
       return True
