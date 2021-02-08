@@ -1,14 +1,14 @@
 import hashlib
 
-def check_digit(password):
+def check_digit(password) -> bool:
   """function: return True if passwords contains a digit otherwise False"""
   digit = False
-  for item in password:
+  for item in password: #check all characters to see if any is digit
     if item.isdigit():
       digit = True
   return digit
-#_______________________
-def get_username():
+#=======================
+def get_username() -> str:
   """ function: get username of 8 characters all lower case"""
   name = input("\nEnter username\n--> ")
   while len(name) < 8 :
@@ -16,14 +16,14 @@ def get_username():
   username = name
   print("Your chosen username is: ",username)
   return username
-#_______________________
-def get_password():
+#=======================
+def get_password() -> str:
   """ function: get password 6 characters and at least on digit"""
   password = input("\nEnter password\n--> ")
   while not( (len(password) >= 8) and (check_digit(password) == True) ) :
     password = input("Must be 8 char and 1 digit\n--> ")
   return password
-#_______________________
+#=======================
 def register():
   user_name = get_username()
   user_password = get_password()
@@ -36,12 +36,8 @@ def register():
   print(record) #####
   myfile.close()
   print("Success! 😎")
- 
-#main program
-#register()
-
 #=======================
-def login():
+def login() -> bool:
   """ function: request username & password, check against file records. Return True if found, otherwise false """
   print("Please login with your username and password")
   name = input("\t👤 Username --> ")
