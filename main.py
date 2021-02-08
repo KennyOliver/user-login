@@ -12,7 +12,7 @@ def get_username() -> str:
   """ function: get username of 8 characters all lower case"""
   name = input("\nEnter username\n--> ")
   while len(name) < 8 :
-    name = input("must be 8 characters >")
+    name = input("Must be at least 8 characters --> ")
   username = name
   print("Your chosen username is: ",username)
   return username
