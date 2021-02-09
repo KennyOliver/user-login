@@ -20,7 +20,7 @@ def get_username() -> str:
 def get_password() -> str:
   """ function: get password 6 characters and at least on digit"""
   password = input("\nEnter password\n--> ")
-  while not( (len(password) >= 8) and (check_digit(password) == True) ) :
+  while not( (len(password) >= 8) and (check_digit(password) is True) ) :
     password = input("Must be 8 char and 1 digit\n--> ")
   return password
 #=======================
@@ -57,7 +57,7 @@ def login() -> bool:
     
     hash_pword = hashlib.sha256(pword.encode("utf-8")).hexdigest()
     
-    if ((name == rec_name) and (hash_pword == rec_password)) == True:
+    if ((name == rec_name) and (hash_pword == rec_password)) is True:
       print("Success! 😎")
       myfile.close()
       return True
@@ -76,7 +76,7 @@ def menu():
   if option == '1':
     register()
   else:
-    if login() == True:
+    if login() is True:
       game()
     else:
       print("👋 Goodbye! 👋")
