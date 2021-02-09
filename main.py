@@ -20,7 +20,7 @@ def get_username() -> str:
 def get_password() -> str:
   """ function: get password 6 characters and at least on digit"""
   password = input("\nEnter password\n--> ")
-  while not( (len(password) >= 8) and (check_digit(password) is True) ) :
+  while not( (len(password) >= 8) and (check_digit(password) is True)) :
     password = input("Must be 8 char and 1 digit\n--> ")
   return password
 #=======================
