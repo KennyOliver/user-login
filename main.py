@@ -1,76 +1,87 @@
 import hashlib
 
 def check_digit(password) -> bool:
-  """function: return True if passwords contains a digit otherwise False"""
+  """ if password contains 1+ digit, return True, else False """
+  
   digit = False
-  for item in password: #check all characters to see if any is digit
-    if item.isdigit():
+  for char in password: #see if any character is digit
+    if char.isdigit():
       digit = True
   return digit
 #=======================
 def get_username() -> str:
-  """ function: get username of 8 characters all lower case"""
+  """ get username of 8+ char """
+  
   username = input("\nEnter username\n--> ")
-  while len(username) < 8 :
+  while len(username) < 8:
     username = input("Must be at least 8 characters --> ")
-  print("Your chosen username is: ",username)
+  print(f"Your chosen username is: {username}".format(username))
   return username
 #=======================
 def get_password() -> str:
-  """ function: get password 6 characters and at least on digit"""
+  """ get password 8+ char and at 1+ digit"""
+  
   password = input("\nEnter password\n--> ")
-  while not( (len(password) >= 8) and (check_digit(password) is True)) :
+  while not((len(password) >= 8) and (check_digit(password) is True)):
     password = input("Must be 8 char and 1 digit\n--> ")
   return password
 #=======================
 def register():
-  user_name = get_username()
-  user_password = get_password()
+  """ registration """
   
-  hash_password = hashlib.sha256(user_password.encode("utf-8")).hexdigest()
+  username = get_username()
+  userPass = get_password()
   
-  record = user_name + "," + hash_password + ",\n"
-  myfile = open("passwords.txt","a")
+  hashPass = hashlib.sha256(userPass.encode("utf-8")).hexdigest()
+  
+  record = username + "," + hashPass + "," + "\n"
+  myfile = open("passwords.txt",'a')
   myfile.write(record)
   myfile.close()
-  print("Success! 😎")
+  print("Success! 😎\n")
   
   now_menu = input("Would you like go to the menu now?\n\t[Y] Yes\n\t[N] No\n--> ").upper()
   if now_menu == 'Y':
     menu()
   else:
-    print("Re-run the program to access menu.")
+    print("Re-run the program to access the menu.")
 #=======================
 def login() -> bool:
-  """ function: request username & password, check against file records. Return True if found, otherwise false """
+  """ request username & password, check against file records. If found, return True, else False """
   print("")
   print("Please login with your username and password")
-  name = input("\t👤 Username --> ")
+  
+  username = input("\t👤 Username --> ")
   pword = input("\t🔒 Password --> ")
   
   myfile = open("passwords.txt",'r')
   for record in myfile:
     remove_comma = record.split(",")
-    rec_name = remove_comma[0]
+    rec_username = remove_comma[0]
     rec_password = remove_comma[1]
     #print(remove_comma) #shows that there is a "\n" at the end of every record
     
     hash_pword = hashlib.sha256(pword.encode("utf-8")).hexdigest()
     
-    if ((name == rec_name) and (hash_pword == rec_password)) is True:
-      print("Success! 😎")
+    if ((username == rec_username) and (hash_pword == rec_password)) is True:
+      print("Success! 😎\n")
       myfile.close()
       return True
+  
   myfile.close()
   print("⚠️ Invalid username/password!\n⚠️ No entry to the game!")
   return False
 #=======================
 def menu():
+  """ main menu """
+  
   print("\n")
   print("-" * 15)
   print("🎮 Welcome! 🎮")
   print("-" * 15)
-  print("Choose [1] or [2]\n\t[1] Register 📝\n\t[2] Login 👥 ")
+  print("\n")
+  
+  print("Choose action:\n\t[1] Register 📝\n\t[2] Login 👥 ")
   option = input("\t--> ")
   
   while not (option.isdigit() and option in ["1","2"]):
