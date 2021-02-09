@@ -10,10 +10,9 @@ def check_digit(password) -> bool:
 #=======================
 def get_username() -> str:
   """ function: get username of 8 characters all lower case"""
-  name = input("\nEnter username\n--> ")
-  while len(name) < 8 :
-    name = input("Must be at least 8 characters --> ")
-  username = name
+  username = input("\nEnter username\n--> ")
+  while len(username) < 8 :
+    username = input("Must be at least 8 characters --> ")
   print("Your chosen username is: ",username)
   return username
 #=======================
@@ -44,6 +43,7 @@ def register():
 #=======================
 def login() -> bool:
   """ function: request username & password, check against file records. Return True if found, otherwise false """
+  print("")
   print("Please login with your username and password")
   name = input("\t👤 Username --> ")
   pword = input("\t🔒 Password --> ")
@@ -66,7 +66,10 @@ def login() -> bool:
   return False
 #=======================
 def menu():
+  print("\n")
+  print("-" * 15)
   print("🎮 Welcome! 🎮")
+  print("-" * 15)
   print("Choose [1] or [2]\n\t[1] Register 📝\n\t[2] Login 👥 ")
   option = input("\t--> ")
   
@@ -82,6 +85,7 @@ def menu():
       print("👋 Goodbye! 👋")
 #=======================
 def game():
+  print("")
   print("👾 THIS IS AN AMAZING GAME! 👾")
 #=======================
 # main program
